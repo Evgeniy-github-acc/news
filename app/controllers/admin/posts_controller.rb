@@ -18,7 +18,11 @@ class Admin::PostsController < ApplicationController
   end
 
   def update
-    @post.update(post_params)
+    if @post.update(post_params)
+      redirect_to [:admin, @post]
+    else
+      render :new
+    end
   end
   
   def destroy
@@ -36,6 +40,6 @@ class Admin::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :publish_date)
+    params.require(:post).permit(:title, :body, :publish_date, :image)
   end
 end

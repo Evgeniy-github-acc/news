@@ -2,7 +2,10 @@ tr[id = "post-#{ post.id }"]
   td = post.created_at.strftime("%d %m %Y")
   td = post.title
   td = post.publish_date.strftime("%d %m %Y")
-  td = 'post.image_thumbnail'
+  - if post.image.attached?
+    td = image_tag(post.image_as_thumbnail(60))
+  - else
+    td = 'Нет изображения' 
   td = 'post.published'
   td = 'post.on_main_page'
   td = link_to 'Открыть', admin_post_path(post)
