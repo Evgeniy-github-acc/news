@@ -1,0 +1,12 @@
+tr[id = "post-#{ post.id }"]
+  td = post.created_at.strftime("%d %m %Y")
+  td = post.title
+  td = post.publish_date.strftime("%d %m %Y")
+  td = 'post.image_thumbnail'
+  td = 'post.published'
+  td = 'post.on_main_page'
+  td = link_to 'Открыть', admin_post_path(post)
+  td = button_to 'Удалить', admin_post_path(post), 
+                            method: :delete, 
+                            remote: true,
+                            form: { data: { turbo_confirm: 'Вы уверенны, что хотите удалтиь запись?' } }

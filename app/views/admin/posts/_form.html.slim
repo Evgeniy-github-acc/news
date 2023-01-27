@@ -1,0 +1,9 @@
+= form_with model: [:admin, post] do |form|
+  p = form.label :title
+  p = form.text_field :title, size: '100x5'
+  p = form.text_area :body, size: '100x40'
+  p = form.date_select :publish_date
+  p 
+    = form.submit 'Сохранить'
+    = link_to 'Закрыть', :back
+    = form.button 'Опубликовать'

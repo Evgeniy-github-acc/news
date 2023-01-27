@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+20.times do
+  Post.create(
+    title: Faker::Hipster.sentence,
+    body: Faker::Hipster.paragraphs(number: 1).first,
+    publish_date: Faker::Date.between(from: '2023-01-01', to: '2023-02-28')
+  )
+end
