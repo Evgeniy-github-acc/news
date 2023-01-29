@@ -11,13 +11,13 @@
   </head>
 
   <body>
-    <% if admin_signed_in? %>
-      <%= button_to('logout', destroy_admin_session_path, method: :delete) %>
-    <% end %>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
+    <div class="container">
+      <%= render 'shared/header'%>
+      <div class="mt-2">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
     <%= yield %>
+    </div>
   </body>
 </html>

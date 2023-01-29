@@ -1,15 +1,22 @@
 = render 'errors'
-= form_with model: [:admin, post] do |form|
-  p = form.label :title
-  p = form.text_field :title, size: '100x5'
-  p = form.rich_text_area :body, size: '100x40'
-  p = form.date_select :publish_date
-  p = link_to image_tag(post.image_as_thumbnail(300)), post.image if post.image.attached?
-  p  
-    = form.label :image
-    = form.file_field :image
-  p 
-    = form.submit 'Сохранить'
-    = link_to 'Закрыть', admin_posts_path
-= form_with model: [:admin, post], url: admin_publish_post_path(post), method: :patch do |form|
-  = form.submit 'Опубликовать'
+.container.mb-3
+  = form_with model: [:admin, post] do |form|
+    .mb-3.d-grid.gap-2.d-md-flex.justify-content-md-end
+      = form.label 'Дата выхода публикации'
+      = form.date_field :publish_date
+    .input-group.mb-3
+      = form.text_field :title, class: 'form-control form-control-lg', placeholder: 'Название публикации', width: '200'
+    .mb-3
+      = form.rich_text_area :body
+    .input-group.mb-3
+      = form.label 'Прикрепить изображение', class: 'form-control'
+      = form.file_field :image, class: 'form-control'
+    .mb-3
+      = link_to image_tag(post.image_as_thumbnail), post.image if post.image.attached?
+    .d-grid.gap-2.d-md-flex.justify-content-md-end
+      = form.submit 'Сохранить', class: 'btn btn-secondary'
+      = link_to 'Закрыть', admin_posts_path, class: 'btn btn-secondary'
+  .mt-3.d-grid.gap-2.d-md-flex.justify-content-md-end
+    -if post.id
+      = form_with model: [:admin, post], url: admin_publish_post_path(post), method: :patch do |form|
+        = form.submit 'Опубликовать', class: 'btn btn-primary btn-lg'

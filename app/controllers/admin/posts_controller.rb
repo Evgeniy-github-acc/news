@@ -15,7 +15,9 @@ class Admin::PostsController < ApplicationController
   
   def create
     post = Post.new(post_params)
-    post.save
+    if post.save
+      redirect_to [:admin, post]
+    end
   end
 
   def update

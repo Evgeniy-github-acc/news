@@ -45,6 +45,7 @@ gem "slim-rails"
 gem 'faker'
 gem 'active_storage_validations'
 gem 'devise'
+gem 'bootstrap'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

@@ -3,7 +3,7 @@ tr[id = "post-#{ post.id }"]
   td = post.title
   td = post.publish_date.strftime("%d %m %Y")
   - if post.image.attached?
-    td = image_tag(post.image_as_thumbnail(60))
+    td = image_tag(post.image_as_thumbnail)
   - else
     td = 'Нет изображения' 
   td = post.published ? 'Да' : 'Нет'
