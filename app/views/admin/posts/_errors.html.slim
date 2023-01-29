@@ -1,0 +1,4 @@
+    - if @post.errors.full_messages.any?
+      - @post.errors.full_messages.each do |error_message|
+        br
+          = error_message if @post.errors.full_messages.first == error_message

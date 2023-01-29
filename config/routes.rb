@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :posts
+    patch 'posts/:id/publish', to: 'posts#publish', as: 'publish_post'
   end
 end

@@ -1,5 +1,5 @@
 class Admin::PostsController < ApplicationController
-  before_action :load_post, only: %i[destroy update show]
+  before_action :load_post, only: %i[destroy update show publish]
   
   def index
     @posts = Post.all
@@ -21,10 +21,18 @@ class Admin::PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to [:admin, @post]
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
   
+  def publish
+    if @post.publish
+      redirect_to [:admin, @post]
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @post.destroy
     respond_to do |format|

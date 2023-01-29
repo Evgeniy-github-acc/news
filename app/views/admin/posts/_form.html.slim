@@ -1,3 +1,4 @@
+= render 'errors'
 = form_with model: [:admin, post] do |form|
   p = form.label :title
   p = form.text_field :title, size: '100x5'
@@ -10,4 +11,5 @@
   p 
     = form.submit 'Сохранить'
     = link_to 'Закрыть', admin_posts_path
-    = form.button 'Опубликовать'
+= form_with model: [:admin, post], url: admin_publish_post_path(post), method: :patch do |form|
+  = form.submit 'Опубликовать'
