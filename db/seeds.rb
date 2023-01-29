@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+Admin.create!(email: 'admin@example.com', password: '123456', password_confirmation: '123456')
+
 20.times do
   Post.create(
     title: Faker::Hipster.sentence,

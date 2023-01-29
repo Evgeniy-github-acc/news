@@ -44,6 +44,7 @@ gem "bootsnap", require: false
 gem "slim-rails"
 gem 'faker'
 gem 'active_storage_validations'
+gem 'devise'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

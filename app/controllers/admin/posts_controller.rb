@@ -1,4 +1,5 @@
 class Admin::PostsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :load_post, only: %i[destroy update show publish]
   
   def index
