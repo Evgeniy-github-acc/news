@@ -6,8 +6,8 @@ tr[id = "post-#{ post.id }"]
     td = image_tag(post.image_as_thumbnail)
   - else
     td = 'Нет изображения' 
-  td = post.published ? 'Да' : 'Нет'
-  td = 'post.on_main_page'
+  td = post.published? ? 'Да' : 'Нет'
+  td = post.on_main_page ? 'Да' : 'Нет'
   td = link_to 'Открыть', admin_post_path(post)
   td = button_to 'Удалить', admin_post_path(post), 
                             method: :delete, 

@@ -6,6 +6,9 @@
       = form.date_field :publish_date
     .input-group.mb-3
       = form.text_field :title, class: 'form-control form-control-lg', placeholder: 'Название публикации', width: '200'
+    .mb-3.form-check.form-switch
+      = form.label 'Опубликовать на главной странице'
+      = form.check_box :on_main_page, role: "switch", class: "form-check-input"
     .mb-3
       = form.rich_text_area :body
     .input-group.mb-3

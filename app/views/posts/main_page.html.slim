@@ -1,0 +1,23 @@
+h2 = 'Главные новости'
+- if @posts.count >= 3  
+  .card-group
+    .card
+      img.card-img-top[src= url_for(@posts[0].image)]
+      .card-body
+        h5.card-title = @posts[0].title
+      .card-footer
+        small.text-muted = @posts[0].publish_date.strftime("%d %m %Y")
+    .card
+      img.card-img-top[src= url_for(@posts[1].image)]
+      .card-body
+        h5.card-title = @posts[1].title
+      .card-footer
+        small.text-muted = @posts[1].publish_date.strftime("%d %m %Y")
+    .card
+      img.card-img-top[src= url_for(@posts[2].image)]
+      .card-body
+        h5.card-title = @posts[2].title
+      .card-footer
+        small.text-muted = @posts[2].publish_date.strftime("%d %m %Y")
+  .d-md-flex.justify-content-md-end
+    = link_to 'Читать все новости >>', posts_path

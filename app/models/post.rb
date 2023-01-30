@@ -5,6 +5,11 @@ class Post < ApplicationRecord
   validates :title, :body, presence: true, if: :published?
   validates :image, attached: true, if: :published?
 
+  default_scope { order("publish_date DESC") }
+
+  scope :index_page, -> { where("published = ? AND publish_date < ?", true, Date.today) }
+  scope :main_page, -> { index_page.where( on_main_page: true ) }
+
   def image_as_thumbnail
     image.variant(resize_to_limit: [60, 60]).processed
   end
@@ -16,5 +21,9 @@ class Post < ApplicationRecord
   def publish
     self.published = true
     false unless save
+  end
+
+  def self.for_main_page
+    main_page.size >= 3 ? main_page : index_page.first(3)
   end
 end
