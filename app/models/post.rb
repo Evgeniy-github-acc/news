@@ -2,8 +2,12 @@ class Post < ApplicationRecord
   has_one_attached :image
   has_rich_text :body
 
-  validates :title, :body, presence: true, if: :published?
+  validates :title, :body, :publish_date, presence: true, if: :published?
   validates :image, attached: true, if: :published?
+
+  validates :image,
+    content_type: { in: ['image/png', 'image/jpg', 'image/jpeg'], message: 'needs to be an PNG or JPEG image' },
+    dimension: { width: {min: 60, max: 2400}, height: {min: 60, max: 2400} }
 
   default_scope { order("publish_date DESC") }
 
@@ -11,6 +15,7 @@ class Post < ApplicationRecord
   scope :main_page, -> { index_page.where( on_main_page: true ) }
 
   def image_as_thumbnail
+    return image unless image.variable?
     image.variant(resize_to_limit: [60, 60]).processed
   end
 
