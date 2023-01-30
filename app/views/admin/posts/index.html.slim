@@ -2,6 +2,8 @@
   .mb-3.d-grid.gap-2.d-md-flex.justify-content-md-between
     = link_to 'Новая публикация', new_admin_post_path, class: 'btn btn-primary'
     = button_to 'Выход', destroy_admin_session_path, method: :delete, class: 'btn btn-danger'
+  .d-flex.justify-content-center
+    == pagy_bootstrap_nav(@pagy)
   .table-responsive  
     table.table.table-bordered
       tr
@@ -11,7 +13,6 @@
         th = 'Изображение'
         th = 'Готово к публикации'
         th = 'На главной странице'
-        th = 'Просмотр/редактирование'
+        th = 'Просмотр'
         th = 'Удаление'
-        - @posts.with_attached_image.each do |post|
-          = render 'post', post: post
+        = render @posts

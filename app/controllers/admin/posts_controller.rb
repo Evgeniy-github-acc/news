@@ -3,7 +3,7 @@ class Admin::PostsController < ApplicationController
   before_action :load_post, only: %i[destroy update show publish]
   
   def index
-    @posts = Post.all
+    @pagy, @posts = pagy(Post.all, items: 10)
   end
 
   def show

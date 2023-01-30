@@ -8,8 +8,9 @@ tr[id = "post-#{ post.id }"]
     td = 'Нет изображения' 
   td = post.published? ? 'Да' : 'Нет'
   td = post.on_main_page ? 'Да' : 'Нет'
-  td = link_to 'Открыть', admin_post_path(post)
+  td = link_to 'Открыть', admin_post_path(post), class: "btn btn-outline-secondary btn-sm'"
   td = button_to 'Удалить', admin_post_path(post), 
                             method: :delete, 
                             remote: true,
-                            form: { data: { turbo_confirm: 'Вы уверенны, что хотите удалтиь запись?' } }
+                            form: { data: { turbo_confirm: 'Вы уверенны, что хотите удалтиь запись?' } },
+                            class: 'btn btn-outline-danger btn-sm'
