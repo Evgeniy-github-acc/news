@@ -46,6 +46,7 @@ gem 'faker'
 gem 'active_storage_validations'
 gem 'devise'
 gem 'bootstrap'
+gem 'pagy', '~> 6.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

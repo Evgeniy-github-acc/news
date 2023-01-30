@@ -1,2 +1,6 @@
-- @posts.each do |post|
-  p = post.title
+.d-flex.justify-content-center
+  / = link_to "< Previous page", posts_path(page: @pagy.prev)
+  / = link_to "Next page >", posts_path(page: @pagy.next)
+  == pagy_bootstrap_nav(@pagy)
+.posts
+  = render @posts

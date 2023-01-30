@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-
+  
   def index
-    @posts = Post.where(published: true)
+    @pagy, @posts = pagy(Post.where(published: true), items: 5)
   end
 end
