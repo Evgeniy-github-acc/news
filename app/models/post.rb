@@ -2,7 +2,8 @@ class Post < ApplicationRecord
   has_one_attached :image
   has_rich_text :body
 
-  validates :title, :body, :publish_date, presence: true, if: :published?
+  validates :publish_date, presence: true
+  validates :title, :body,  presence: true, if: :published?
   validates :image, attached: true, if: :published?
 
   validates :image,
@@ -29,6 +30,6 @@ class Post < ApplicationRecord
   end
 
   def self.for_main_page
-    main_page.size >= 3 ? main_page : index_page.first(3)
+    main_page.size >= 3 ? main_page.first(3) : index_page.first(3)
   end
 end

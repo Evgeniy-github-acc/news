@@ -7,4 +7,8 @@ class PostsController < ApplicationController
   def main_page
     @posts = Post.for_main_page
   end
+
+  def show
+    @post = Post.find(params[:id])
+  end
 end

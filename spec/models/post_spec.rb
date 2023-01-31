@@ -6,10 +6,10 @@ RSpec.describe Post, type: :model do
       before { allow(subject).to receive(:published?).and_return(true) }
       it { should validate_presence_of(:title) }
       it { should validate_presence_of(:body) }
-      it { should validate_presence_of(:publish_date) }
       it { should validate_attached_of(:image) }
     end
 
+    it { should validate_presence_of(:publish_date) }
     it { should validate_content_type_of(:image).allowing('image/png', 'image/jpg', 'image/jpeg') }
     it { should validate_dimensions_of(:image).width_between(60..2400) }
     it { should validate_dimensions_of(:image).height_between(60..2400) }

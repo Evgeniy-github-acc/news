@@ -14,9 +14,11 @@ class Admin::PostsController < ApplicationController
   end
   
   def create
-    post = Post.new(post_params)
-    if post.save
-      redirect_to [:admin, post]
+    @post = Post.new(post_params)
+    if @post.save
+      redirect_to [:admin, @post]
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
