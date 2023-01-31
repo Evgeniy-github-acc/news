@@ -7,12 +7,12 @@ class Post < ApplicationRecord
   validates :image, attached: true, if: :published?
 
   validates :image,
-    content_type: { in: ['image/png', 'image/jpg', 'image/jpeg'], message: 'needs to be an PNG or JPEG image' },
-    dimension: { width: {min: 60, max: 2400}, height: {min: 60, max: 2400} }
+    content_type: { in: ['image/png', 'image/jpg', 'image/jpeg'], message: 'needs to be an PNG or JPEG image' }
+    #dimension: { width: {min: 60, max: 2400}, height: {min: 60, max: 2400} }
 
   default_scope { order("publish_date DESC") }
 
-  scope :index_page, -> { where("published = ? AND publish_date < ?", true, Date.today) }
+  scope :index_page, -> { where("published = ? AND publish_date <= ?", true, Date.today) }
   scope :main_page, -> { index_page.where( on_main_page: true ) }
 
   def image_as_thumbnail

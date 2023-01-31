@@ -9,5 +9,5 @@
         h5.card-title
           = post.title
         p.card-text
-          = post.body.to_plain_text
+          = post.body.to_plain_text.truncate(400)
         = link_to 'Читать', post_path(post), class: "btn btn-secondary"

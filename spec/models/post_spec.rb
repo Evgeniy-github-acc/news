@@ -11,8 +11,6 @@ RSpec.describe Post, type: :model do
 
     it { should validate_presence_of(:publish_date) }
     it { should validate_content_type_of(:image).allowing('image/png', 'image/jpg', 'image/jpeg') }
-    it { should validate_dimensions_of(:image).width_between(60..2400) }
-    it { should validate_dimensions_of(:image).height_between(60..2400) }
   end
 
   describe "scopes" do
@@ -25,7 +23,7 @@ RSpec.describe Post, type: :model do
 
       it { is_expected.to include(post1) }
       it { is_expected.not_to include(post2) }
-      it { is_expected.not_to include(post3) }
+      it { is_expected.to include(post3) }
     end
 
     describe ".main_page" do
@@ -58,6 +56,23 @@ RSpec.describe Post, type: :model do
     it "returns false if the post could not be saved" do
       allow(post).to receive(:save).and_return(false)
       expect(post.publish).to be false
+    end
+  end
+
+  describe ".for_main_page" do
+    let!(:post0) { create(:post, :with_image, on_main_page: true, publish_date: 3.day.ago, published: true) }
+    let!(:post1) { create(:post, :with_image, on_main_page: true, publish_date: 2.days.ago, published: true) }
+    let!(:post2) { create(:post, :with_image, on_main_page: true, publish_date: 1.day.ago, published: true) }
+    let!(:post3) { create(:post, :with_image, on_main_page: false, publish_date: Date.today, published: true) }
+    
+        
+    it "returns the first 3 posts from .main_page if the number of posts is greater than or equal to 3" do
+      expect(described_class.for_main_page).to eq([post2, post1, post0])
+    end
+    
+    it "returns the first 3 posts from .index_page if the number of posts in .main_page is less than 3" do
+      allow(described_class).to receive(:main_page).and_return([])
+      expect(described_class.for_main_page).to eq([post3, post2, post1])
     end
   end
 end

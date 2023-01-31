@@ -1,0 +1,13 @@
+.card.mb-3
+  h5.card-header
+    = @post.publish_date.strftime("%d %m %Y")
+  .row.g-0
+    .col-md-4
+      img.img-fluid.rounded-start[src= url_for(@post.image)]
+    .col-md-8
+      .card-body
+        h5.card-title
+          = @post.title
+        p.card-text
+          = @post.body.to_plain_text
+        = link_to 'К списку новостей', posts_path, class: "btn btn-secondary"
